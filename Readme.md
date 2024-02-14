@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Семён Климов](https://up.htmlacademy.ru/javascript/31/user/2394671).
-* Наставник: `Неизвестно`.
+* Наставник: [Анастасия Гущина](https://htmlacademy.ru/profile/vanastasiya).
 
 ---
 
