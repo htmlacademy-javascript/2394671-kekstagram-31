@@ -122,6 +122,5 @@ const photoDescription = () => ({
   comments: Array.from({length: getRandomInteger(COMMENTS_QUANTITY.min, COMMENTS_QUANTITY.max)}, generateComment)
 });
 
-const photosDescriptionList = Array.from({length:PHOTOS_QUANTITY}, photoDescription);
-
-console.log(photosDescriptionList)
+Array.from({length:PHOTOS_QUANTITY}, photoDescription);
+//const photosDescriptionList = Array.from({length:PHOTOS_QUANTITY}, photoDescription);
