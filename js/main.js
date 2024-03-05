@@ -82,7 +82,6 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-
 const getRandomValue = (min, max) => {
   const photoIdList = [];
 
@@ -105,27 +104,20 @@ const getRandomValue = (min, max) => {
 const generatePhotoId = getRandomValue(ID_QUANTITY.min, ID_QUANTITY.max);
 const generateLikes = getRandomValue(LIKES_QUANTITY.min, LIKES_QUANTITY.max);
 const generatePhotoUrl = getRandomValue(URL_QUANTITY.min, URL_QUANTITY.max);
-
-const NumberDescription = () => DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)];
-
 const generateCommentId = getRandomValue(COMMENTS_ID_QUANTITY.min, COMMENTS_ID_QUANTITY.max);
 const generateCommentAvatar = getRandomValue(AVATARS_QUANTITY.min, AVATARS_QUANTITY.max);
-
-const generateCommentFullName = () => `${SURNAMES[getRandomInteger(0, SURNAMES.length - 1)]} ${NAMES[getRandomInteger(0, NAMES.length - 1)]}`;
-
-//const generateCommentMessage = () => `${COMMENT_MESSAGE[getRandomInteger(0, COMMENT_MESSAGE.length - 1)]} ${COMMENT_MESSAGE[getRandomInteger(0, COMMENT_MESSAGE.length - 1)]}`;
 
 const generateComment = () => ({
   id: generateCommentId(),
   avatar: `photos/${generateCommentAvatar()}.jpg`,
   message: `${COMMENT_MESSAGE[getRandomInteger(0, COMMENT_MESSAGE.length - 1)]} ${COMMENT_MESSAGE[getRandomInteger(0, COMMENT_MESSAGE.length - 1)]}`,
-  name: generateCommentFullName()
+  name: `${SURNAMES[getRandomInteger(0, SURNAMES.length - 1)]} ${NAMES[getRandomInteger(0, NAMES.length - 1)]}`
 });
 
 const photoDescription = () => ({
   id: generatePhotoId(),
   url: `photos/${generatePhotoUrl()}.jpg`,
-  description: NumberDescription(),
+  description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
   likes: generateLikes(),
   comments: Array.from({length: getRandomInteger(COMMENTS_QUANTITY.min, COMMENTS_QUANTITY.max)}, generateComment)
 });
