@@ -45,34 +45,34 @@ const COMMENT_MESSAGE = [
 
 const PHOTOS_QUANTITY = 25;
 
-const URL_QUANTITY = {
-  min: 1,
-  max: PHOTOS_QUANTITY
+const UrlQuantity = {
+  MIN: 1,
+  MAX: PHOTOS_QUANTITY
 };
 
-const ID_QUANTITY = {
-  min: 1,
-  max: 25
+const IdQuantity = {
+  MIN: 1,
+  MAX: 25
 };
 
-const LIKES_QUANTITY = {
-  min: 15,
-  max: 200
+const LikesQuantity = {
+  MIN: 15,
+  MAX: 200
 };
 
-const COMMENTS_ID_QUANTITY = {
-  min: 10000,
-  max: 99999
+const CommentsIdQuantity = {
+  MIN: 10000,
+  MAX: 99999
 };
 
-const AVATARS_QUANTITY = {
-  min: 1,
-  max: 6
+const AvatarsQuantity = {
+  MIN: 1,
+  MAX: 6
 };
 
-const COMMENTS_QUANTITY = {
-  min: 0,
-  max: 30
+const CommentsQuantity = {
+  MIN: 0,
+  MAX: 30
 };
 
 const getRandomInteger = (a, b) => {
@@ -82,7 +82,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomValue = (min, max) => {
+const getRandomId = (min, max) => {
   const photoIdList = [];
 
   return () => {
@@ -101,26 +101,26 @@ const getRandomValue = (min, max) => {
   };
 };
 
-const generatePhotoId = getRandomValue(ID_QUANTITY.min, ID_QUANTITY.max);
-const generateLikes = getRandomValue(LIKES_QUANTITY.min, LIKES_QUANTITY.max);
-const generatePhotoUrl = getRandomValue(URL_QUANTITY.min, URL_QUANTITY.max);
-const generateCommentId = getRandomValue(COMMENTS_ID_QUANTITY.min, COMMENTS_ID_QUANTITY.max);
-const generateCommentAvatar = getRandomValue(AVATARS_QUANTITY.min, AVATARS_QUANTITY.max);
+const generatePhotoId = getRandomId(IdQuantity.MIN, IdQuantity.MAX);
+const generatePhotoUrl = getRandomId(UrlQuantity.MIN, UrlQuantity.MAX);
+const generateCommentId = getRandomId(CommentsIdQuantity.MIN, CommentsIdQuantity.MAX);
 
 const generateComment = () => ({
   id: generateCommentId(),
-  avatar: `photos/${generateCommentAvatar()}.jpg`,
+  avatar: `img/avatar-${getRandomInteger(AvatarsQuantity.MIN, AvatarsQuantity.MAX)}.svg`,
   message: `${COMMENT_MESSAGE[getRandomInteger(0, COMMENT_MESSAGE.length - 1)]} ${COMMENT_MESSAGE[getRandomInteger(0, COMMENT_MESSAGE.length - 1)]}`,
   name: `${SURNAMES[getRandomInteger(0, SURNAMES.length - 1)]} ${NAMES[getRandomInteger(0, NAMES.length - 1)]}`
 });
 
-const photoDescription = () => ({
+const createPhoto = () => ({
   id: generatePhotoId(),
   url: `photos/${generatePhotoUrl()}.jpg`,
   description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
-  likes: generateLikes(),
-  comments: Array.from({length: getRandomInteger(COMMENTS_QUANTITY.min, COMMENTS_QUANTITY.max)}, generateComment)
+  likes: getRandomInteger(LikesQuantity.MIN, LikesQuantity.MAX),
+  comments: Array.from({length: getRandomInteger(CommentsQuantity.MIN, CommentsQuantity.MAX)}, generateComment)
 });
 
-Array.from({length:PHOTOS_QUANTITY}, photoDescription);
-//const photosDescriptionList = Array.from({length:PHOTOS_QUANTITY}, photoDescription);
+
+const photosDescriptionList = () => Array.from({length:PHOTOS_QUANTITY}, createPhoto);
+
+photosDescriptionList();
