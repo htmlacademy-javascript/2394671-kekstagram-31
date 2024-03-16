@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomId} from './util';
+import {getRandomInteger, getRandomId} from './util.js';
 
 const DESCRIPTIONS = [
   'Пустой пляж рядом с отелем',

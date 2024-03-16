@@ -1,5 +1,4 @@
 // Выдает случайное число в диапазоне от и до
-
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -8,7 +7,6 @@ const getRandomInteger = (a, b) => {
 };
 
 // Функция с замыканием выдает неповторяющееся число в диапазоне от и до
-
 const getRandomId = (min, max) => {
   const photoIdList = [];
 
