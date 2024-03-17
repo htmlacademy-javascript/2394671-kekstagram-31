@@ -97,6 +97,6 @@ const createPhoto = () => ({
 });
 
 
-const photosDescriptionList = () => Array.from({length:PHOTOS_QUANTITY}, createPhoto);
+const getPhotosDescriptionList = () => Array.from({length:PHOTOS_QUANTITY}, createPhoto);
 
-export {photosDescriptionList};
+export {getPhotosDescriptionList};
