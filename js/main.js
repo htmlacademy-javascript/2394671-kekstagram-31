@@ -1,4 +1,4 @@
-import {photosDescriptionList} from './data.js';
+import {getPhotosDescriptionList} from './data.js';
+import {listPhoto} from './create-user-pictures.js';
 
-photosDescriptionList();
-
+listPhoto(getPhotosDescriptionList());
