@@ -26,4 +26,7 @@ const getRandomId = (min, max) => {
   };
 };
 
-export {getRandomInteger, getRandomId};
+// Callback нажата ли клавиши Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getRandomId, isEscapeKey};
