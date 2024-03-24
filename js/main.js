@@ -1,5 +1,10 @@
 import {getPhotosDescriptionList} from './data.js';
-import {listPhoto} from './create-user-pictures.js';
+import {createUserPhoto} from './create-user-pictures.js';
+import {initBigPicture} from './big-picture.js';
 
-listPhoto(getPhotosDescriptionList());
-import './big-picture-open.js';
+const photoList = getPhotosDescriptionList();
+
+
+createUserPhoto(photoList);
+initBigPicture(photoList);
+
