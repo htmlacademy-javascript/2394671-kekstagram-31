@@ -13,6 +13,7 @@ const drawSocialComment = (comments) => {
     const commentMessage = document.createElement('p');
 
     comment.classList.add('social__comment');
+    comment.classList.add('hidden');
     commentImage.classList.add('social__picture');
     commentMessage.classList.add('social__text');
     commentImage.src = avatar;

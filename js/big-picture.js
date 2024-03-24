@@ -1,12 +1,13 @@
 import {isEscapeKey} from './util';
 import {drawBigPicture} from './draw-big-picture';
+import {findersSocialComment} from './show-comments';
 
 const pictureContainer = document.querySelector('.pictures');
 const windowModal = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('#picture-cancel');
-const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentsList = document.querySelector('.social__comments');
-const commentsLoader = document.querySelector('.comments-loader');
+
+socialCommentsList.innerHTML = '';
 
 const openWindowModal = (evt, posts) => {
   if (evt.target.closest('.picture')) {
@@ -19,9 +20,8 @@ const openWindowModal = (evt, posts) => {
     const currentPost = posts.find((item) => item.id === currentElement);
     drawBigPicture(currentPost);
 
-    // - Прячем блок счетчика комментариев после открытия модального окна и загрузки новых комментариев
-    socialCommentCount.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
+    // - Ищем и раскрываем комментарии
+    findersSocialComment();
 
     // - Добавляем класс чтобы контейнер с фотографиями позади не прокручивался
     document.body.classList.add('modal-open');
