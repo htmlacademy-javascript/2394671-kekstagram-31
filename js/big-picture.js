@@ -1,13 +1,11 @@
 import {isEscapeKey} from './util';
 import {drawBigPicture} from './draw-big-picture';
-import {findersSocialComment} from './show-comments';
+import {clearComments} from './draw-comments';
 
 const pictureContainer = document.querySelector('.pictures');
 const windowModal = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('#picture-cancel');
 const socialCommentsList = document.querySelector('.social__comments');
-
-socialCommentsList.innerHTML = '';
 
 const openWindowModal = (evt, posts) => {
   if (evt.target.closest('.picture')) {
@@ -20,9 +18,6 @@ const openWindowModal = (evt, posts) => {
     const currentPost = posts.find((item) => item.id === currentElement);
     drawBigPicture(currentPost);
 
-    // - Ищем и раскрываем комментарии
-    findersSocialComment();
-
     // - Добавляем класс чтобы контейнер с фотографиями позади не прокручивался
     document.body.classList.add('modal-open');
   }
@@ -33,6 +28,9 @@ const closeWindowModal = () => {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   socialCommentsList.innerHTML = '';
+
+  // - возвращаем кнопку загрузки доп комментариев, очищаем комментарии.
+  clearComments();
 
   // - убираем класс чтобы контейнер с фотографиями позади мог прокручиваться
   document.body.classList.remove('modal-open');
