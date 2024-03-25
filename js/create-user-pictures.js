@@ -2,10 +2,12 @@ const templatePicture = document.querySelector('#picture').content.querySelector
 const picturesList = document.querySelector('.pictures');
 const photoFragment = document.createDocumentFragment();
 
-const listPhoto = (Photo) => {
-  Photo.forEach(({url, description, likes, comments})=> {
+const createUserPhoto = (photo) => {
+  photo.forEach(({url, description, likes, comments, id})=> {
     const templatePictureClone = templatePicture.cloneNode(true);
     const image = templatePictureClone.querySelector('.picture__img');
+
+    templatePictureClone.dataset.pictureId = id;
     image.src = url;
     image.alt = description;
     templatePictureClone.querySelector('.picture__likes').textContent = likes;
@@ -16,4 +18,4 @@ const listPhoto = (Photo) => {
   picturesList.append(photoFragment);
 };
 
-export {listPhoto};
+export {createUserPhoto};
