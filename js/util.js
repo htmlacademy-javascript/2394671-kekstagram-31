@@ -1,4 +1,4 @@
-// Выдает случайное число в диапазоне от и до
+// - Выдает случайное число в диапазоне от и до
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -6,7 +6,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-// Функция с замыканием выдает неповторяющееся число в диапазоне от и до
+// - Функция с замыканием выдает неповторяющееся число в диапазоне от и до
 const getRandomId = (min, max) => {
   const photoIdList = [];
 
@@ -26,7 +26,7 @@ const getRandomId = (min, max) => {
   };
 };
 
-// Callback нажата ли клавиши Escape
+// - Callback нажата ли клавиши Escape
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {getRandomInteger, getRandomId, isEscapeKey};

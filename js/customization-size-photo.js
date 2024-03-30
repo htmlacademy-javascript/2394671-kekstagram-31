@@ -43,12 +43,12 @@ const enlargesPhoto = () => {
   });
 };
 
-const customizationPhoto = () => {
-  // - Добавляем слушатель на уменьшение фотографии
+const customizationSizePhoto = () => {
+  // - Добавляем обработчик на уменьшение фотографии
   reducingPhoto();
 
-  // - Добавляем слушатель на увеличение фотографии
+  // - Добавляем обработчик на увеличение фотографии
   enlargesPhoto();
 };
 
-export {customizationPhoto};
+export {customizationSizePhoto};
