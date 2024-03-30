@@ -64,19 +64,20 @@ const checkTextareaLength = () => {
   return true;
 };
 
-
 // - Добавляем новые правила для валидации
 pristine.addValidator(hashtagsInput, checksHashTagSpelling, 'введён невалидный хэштег');
 pristine.addValidator(hashtagsInput, checkHastTagQuantity, 'превышено количество хэштегов');
 pristine.addValidator(hashtagsInput, checksDuplicatesHashTag, 'хэштеги не могут повторятся');
 pristine.addValidator(textAreaInput, checkTextareaLength, 'длина комментария не может быть больше 140 символов');
 
+const addValidatingInputs = () => {
+  photoEditorForm.addEventListener('submit', (evt) => {
+    const isValid = pristine.validate();
 
-photoEditorForm.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
+    if (!isValid) {
+      evt.preventDefault();
+    }
+  });
+};
 
-  if (!isValid) {
-    evt.preventDefault();
-  }
-});
-
+export {addValidatingInputs};
