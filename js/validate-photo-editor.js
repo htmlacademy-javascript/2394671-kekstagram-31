@@ -5,7 +5,6 @@ const validHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const getHashtagArray = () => hashtagsInput.value.split(' ');
 
-// - В какое место должна выводиться ошибка?
 const pristine = new Pristine(photoEditorForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -43,6 +42,7 @@ const checkHastTagQuantity = () => {
   return true;
 };
 
+// - Правило: хэштеги не могут повторятся
 const checksDuplicatesHashTag = () => {
   const hashtagArray = getHashtagArray().map((arrayElement) => arrayElement.toLowerCase());
 
@@ -55,6 +55,7 @@ const checksDuplicatesHashTag = () => {
   return true;
 };
 
+// - длина комментария не может быть больше 140 символов
 const checkTextareaLength = () => {
   if (textAreaInput.value.length === 140) {
     return false;
@@ -62,6 +63,7 @@ const checkTextareaLength = () => {
 
   return true;
 };
+
 
 // - Добавляем новые правила для валидации
 pristine.addValidator(hashtagsInput, checksHashTagSpelling, 'введён невалидный хэштег');
@@ -71,16 +73,10 @@ pristine.addValidator(textAreaInput, checkTextareaLength, 'длина комме
 
 
 photoEditorForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  //const hashtagArray = hashtagsInput.value.split(' ');
-
   const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
+
+  if (!isValid) {
+    evt.preventDefault();
   }
 });
-
 
