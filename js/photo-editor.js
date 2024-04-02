@@ -1,4 +1,5 @@
 import {isEscapeKey} from './util.js';
+import {resetValidation} from './validate-photo-editor.js';
 
 const photoUploadInput = document.querySelector('.img-upload__input');
 const photoEditorOverlay = document.querySelector('.img-upload__overlay');
@@ -15,6 +16,8 @@ const openPhotoEditorOverlay = () => {
 };
 
 const closePhotoEditorOverlay = () => {
+  // - Сбрасываем валидацию после закрытия модального окна
+  resetValidation();
   photoEditorOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
@@ -27,8 +30,10 @@ const closePhotoEditorOverlay = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+const isActiveElement = (currentElement) => document.activeElement !== currentElement;
+
 function onDocumentKeydown (evt) {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && isActiveElement(textHashtagsInput) && isActiveElement(textareaDescriptionInput)) {
     evt.preventDefault();
     closePhotoEditorOverlay();
   }
@@ -37,9 +42,6 @@ function onDocumentKeydown (evt) {
 const initPhotoEditor = () => {
   // - Добавляем обработчик на открытие модального окна
   photoUploadInput.addEventListener('change', () => {
-    textHashtagsInput.addEventListener ('focus', (evt) => {
-      evt.stopPropagation();
-    });
     openPhotoEditorOverlay();
   });
 

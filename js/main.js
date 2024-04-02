@@ -4,7 +4,7 @@ import {initBigPicture} from './big-picture.js';
 import {initPhotoEditor} from './photo-editor.js';
 import {addValidatingInputs} from './validate-photo-editor.js';
 import {customizationSizePhoto} from './customization-size-photo.js';
-import './customization-color-filter-photo.js';
+import {initSlider} from './customization-color-filter-photo.js';
 
 const photoList = getPhotosDescriptionList();
 
@@ -14,3 +14,4 @@ initBigPicture(photoList);
 initPhotoEditor();
 addValidatingInputs();
 customizationSizePhoto();
+initSlider();
