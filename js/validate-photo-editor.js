@@ -1,10 +1,10 @@
+const NUMBER_TAGS = 5;
+const TEXTAREA_SYMBOLS = 140;
+
 const photoEditorForm = document.querySelector('.img-upload__form');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const textAreaInput = document.querySelector('.text__description');
 const validHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-
-const NUMBER_TAGS = 5;
-const TEXTAREA_SYMBOLS = 140;
 
 const getHashtagArray = (value) => value.split(' ');
 
