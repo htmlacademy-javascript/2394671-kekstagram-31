@@ -1,9 +1,9 @@
+const COUNT_STEP = 25;
+
 const scaleButtonSmaller = document.querySelector('.scale__control--smaller');
 const scaleButtonBigger = document.querySelector('.scale__control--bigger');
 const scalePhotoSize = document.querySelector('.scale__control--value');
 const currentPhoto = document.querySelector('.img-upload__preview img');
-
-const COUNT_STEP = 25;
 
 let currentValue = parseInt(scalePhotoSize.value, 10);
 

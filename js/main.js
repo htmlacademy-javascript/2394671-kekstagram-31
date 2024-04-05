@@ -8,10 +8,20 @@ import {initSlider} from './customization-color-filter-photo.js';
 
 const photoList = getPhotosDescriptionList();
 
-
+// - Создает фотографии на странице
 createUserPhoto(photoList);
+
+// - Добавляет Модальное окно с выбранной фотографией
 initBigPicture(photoList);
+
+// - Добавляет Модальное окно редактирования
 initPhotoEditor();
+
+// - добавляет валидацию PristineJS
 addValidatingInputs();
+
+// - добавляет возможность редактировать размер фотографии
 customizationSizePhoto();
+
+// - добавляет слайдер на модальное окно редактирования фотографии
 initSlider();

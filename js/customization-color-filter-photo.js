@@ -1,5 +1,5 @@
 const filterList = {
-  None: {
+  none: {
     MIN: 0,
     MAX: 0,
     STEP: 0,
@@ -7,7 +7,7 @@ const filterList = {
     FILTER: '',
     UNITS: ''
   },
-  Chrome: {
+  chrome: {
     MIN: 0,
     MAX: 1,
     STEP: 0.1,
@@ -15,7 +15,7 @@ const filterList = {
     FILTER: 'grayscale',
     UNITS: ''
   },
-  Sepia: {
+  sepia: {
     MIN: 0,
     MAX: 1,
     STEP: 0.1,
@@ -23,7 +23,7 @@ const filterList = {
     FILTER: 'sepia',
     UNITS: ''
   },
-  Marvin: {
+  marvin: {
     MIN: 0,
     MAX: 100,
     STEP: 1,
@@ -31,7 +31,7 @@ const filterList = {
     FILTER: 'invert',
     UNITS: '%'
   },
-  Phobos: {
+  phobos: {
     MIN: 0,
     MAX: 3,
     STEP: 0.1,
@@ -39,7 +39,7 @@ const filterList = {
     FILTER: 'blur',
     UNITS: 'px'
   },
-  Heat: {
+  heat: {
     MIN: 1,
     MAX: 3,
     STEP: 0.1,
@@ -51,7 +51,7 @@ const filterList = {
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderParent = document.querySelector('.img-upload__effect-level');
-const InputValueSlider = document.querySelector('.effect-level__value');
+const inputValueSlider = document.querySelector('.effect-level__value');
 const currentPhoto = document.querySelector('.img-upload__preview img');
 const listFilter = document.querySelector('.effects__list');
 
@@ -81,13 +81,13 @@ const hideSlider = () => {
 
 const clearStyle = () => {
   currentPhoto.style.filter = '';
-  InputValueSlider.value = '';
+  inputValueSlider.value = '';
 };
 
 // - скрываем слайдер т.к по умолчанию стоит вариант без фильтра.
 hideSlider();
 
-let CurrentSettings = {};
+let currentSettings = {};
 
 listFilter.addEventListener('change', (evt) => {
   const currentFilter = filterList[evt.target.value];
@@ -101,7 +101,7 @@ listFilter.addEventListener('change', (evt) => {
     start: currentFilter.START,
   });
 
-  CurrentSettings = {
+  currentSettings = {
     FILTER: currentFilter.FILTER,
     UNITS: currentFilter.UNITS
   };
@@ -123,10 +123,10 @@ const initSlider = () => {
   // - Записываем значение слайдера в Input при изменение значения слайдера.
   sliderElement.noUiSlider.on('update', () => {
     // - подставляем в input актуальное значение слайдера.
-    InputValueSlider.value = sliderElement.noUiSlider.get();
+    inputValueSlider.value = sliderElement.noUiSlider.get();
 
     // - Подставляем актуальные значения для стилей в зависимости от выбранного режима цветокоррекции.
-    currentPhoto.style.filter = `${CurrentSettings.FILTER}(${InputValueSlider.value}${CurrentSettings.UNITS})`;
+    currentPhoto.style.filter = `${currentSettings.FILTER}(${inputValueSlider.value}${currentSettings.UNITS})`;
   });
 };
 
