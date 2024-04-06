@@ -29,4 +29,7 @@ const getRandomId = (min, max) => {
 // - Callback нажата ли клавиши Escape
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+
 export {getRandomInteger, getRandomId, isEscapeKey};
+
+

@@ -43,6 +43,13 @@ const enlargesPhoto = () => {
   });
 };
 
+const clearPhotoSize = () => {
+  currentValue = 100;
+  currentPhoto.style.transform = 'scale(1)';
+  scalePhotoSize.value = '100%';
+};
+
+
 const customizationSizePhoto = () => {
   // - Добавляем обработчик на уменьшение фотографии
   reducingPhoto();
@@ -51,4 +58,4 @@ const customizationSizePhoto = () => {
   enlargesPhoto();
 };
 
-export {customizationSizePhoto};
+export {customizationSizePhoto, clearPhotoSize};

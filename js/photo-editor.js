@@ -1,5 +1,7 @@
 import {isEscapeKey} from './util.js';
 import {resetValidation} from './validate-photo-editor.js';
+import {clearPhotoSize} from './customization-size-photo.js';
+import {sliderClear} from './customization-color-filter-photo.js';
 
 const photoUploadInput = document.querySelector('.img-upload__input');
 const photoEditorOverlay = document.querySelector('.img-upload__overlay');
@@ -20,6 +22,9 @@ const closePhotoEditorOverlay = () => {
   resetValidation();
   photoEditorOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+
+  clearPhotoSize();
+  sliderClear();
 
   // - Очищаем input от файлов при закрытии
   photoUploadInput.value = '';
@@ -51,4 +56,4 @@ const initPhotoEditor = () => {
   });
 };
 
-export {initPhotoEditor};
+export {initPhotoEditor, closePhotoEditorOverlay};
