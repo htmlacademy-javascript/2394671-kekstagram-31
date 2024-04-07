@@ -1,9 +1,19 @@
+import {sendData} from './api.js';
+import {sendDataSuccess, sendDataError} from './alert-message.js';
+
+
 const NUMBER_TAGS = 5;
 const TEXTAREA_SYMBOLS = 140;
+
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
 
 const photoEditorForm = document.querySelector('.img-upload__form');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const textAreaInput = document.querySelector('.text__description');
+const buttonSubmit = document.querySelector('#upload-submit');
 const validHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const getHashtagArray = (value) => value.split(' ');
@@ -49,12 +59,29 @@ pristine.addValidator(hashtagsInput, checkHastTagQuantity, 'превышено �
 pristine.addValidator(hashtagsInput, checksDuplicatesHashTag, 'хэштеги не могут повторятся', 2, true);
 pristine.addValidator(textAreaInput, checkTextareaLength, 'длина комментария не может быть больше 140 символов');
 
-const addValidatingInputs = () => {
+const blockSubmitButton = () => {
+  buttonSubmit.disabled = true;
+  buttonSubmit.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  buttonSubmit.disabled = false;
+  buttonSubmit.textContent = SubmitButtonText.IDLE;
+};
+
+const addValidatingInputs = (onSuccess) => {
   photoEditorForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
     const isValid = pristine.validate();
 
-    if (!isValid) {
-      evt.preventDefault();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .then(sendDataSuccess)
+        .catch(() => sendDataError())
+        .finally(unblockSubmitButton);
     }
   });
 };

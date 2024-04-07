@@ -54,6 +54,7 @@ const sliderParent = document.querySelector('.img-upload__effect-level');
 const inputValueSlider = document.querySelector('.effect-level__value');
 const currentPhoto = document.querySelector('.img-upload__preview img');
 const listFilter = document.querySelector('.effects__list');
+const listFilterOriginal = listFilter.querySelector('#effect-none');
 
 // - Настраиваем слайдер.
 const createSlider = () => {
@@ -130,4 +131,10 @@ const initSlider = () => {
   });
 };
 
-export {initSlider};
+const sliderClear = () => {
+  listFilterOriginal.checked = true;
+  hideSlider();
+  currentPhoto.style.filter = '';
+};
+
+export {initSlider, sliderClear};
