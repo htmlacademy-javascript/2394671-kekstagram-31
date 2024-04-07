@@ -38,7 +38,9 @@ const closePhotoEditorOverlay = () => {
 const isActiveElement = (currentElement) => document.activeElement !== currentElement;
 
 function onDocumentKeydown (evt) {
-  if (isEscapeKey(evt) && isActiveElement(textHashtagsInput) && isActiveElement(textareaDescriptionInput)) {
+  const alertMessage = document.querySelector('.error__inner');
+
+  if (!alertMessage && isEscapeKey(evt) && isActiveElement(textHashtagsInput) && isActiveElement(textareaDescriptionInput)) {
     evt.preventDefault();
     closePhotoEditorOverlay();
   }

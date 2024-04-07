@@ -6,8 +6,7 @@ const templateDataError = document.querySelector('#data-error').content.querySel
 const templateSuccess = document.querySelector('#success').content.querySelector('.success');
 const templateAlert = document.querySelector('#error').content.querySelector('.error');
 
-
-const dataAlert = () => {
+const showDataAlert = () => {
   const templateErrorClone = templateDataError.cloneNode(true);
   document.body.append(templateErrorClone);
 
@@ -16,7 +15,7 @@ const dataAlert = () => {
   }, ALERT_SHOW_TIME);
 };
 
-const notification = (template) => {
+const showNotification = (template) => {
   const templateClone = template.cloneNode(true);
   const button = templateClone.querySelector('[type=button]');
 
@@ -28,7 +27,7 @@ const notification = (template) => {
     }
   };
 
-  const templateRemove = () => {
+  const onButtonClick = () => {
     templateClone.remove();
     removeEventListeners();
   };
@@ -41,29 +40,24 @@ const notification = (template) => {
   };
 
   function removeEventListeners () {
-    button.removeEventListener('click', templateRemove);
+    button.removeEventListener('click', onButtonClick);
     document.removeEventListener('keydown', onDocumentKeydown);
     document.removeEventListener('click', onDocumentClick);
   }
 
-  button.addEventListener('click', templateRemove);
+  button.addEventListener('click', onButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
   document.addEventListener('click', onDocumentClick);
 
   document.body.append(templateClone);
-
-  setTimeout(() => {
-    templateClone.remove();
-    removeEventListeners();
-  }, ALERT_SHOW_TIME);
 };
 
 const sendDataSuccess = () => {
-  notification(templateSuccess);
+  showNotification(templateSuccess);
 };
 
 const sendDataError = () => {
-  notification(templateAlert);
+  showNotification(templateAlert);
 };
 
-export {dataAlert, sendDataSuccess, sendDataError};
+export {showDataAlert, sendDataSuccess, sendDataError};

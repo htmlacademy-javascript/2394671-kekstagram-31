@@ -1,7 +1,14 @@
-import {dataAlert} from './alert-message.js';
+import {showDataAlert} from './alert-message.js';
+
+const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+
+const Url = {
+  GET: '/data',
+  SEND: '/'
+};
 
 const getData = () => fetch(
-  'https://31.javascript.htmlacademy.pro/kekstagram/data')
+  `${BASE_URL}${Url.GET}`)
   .then((response) => {
     if (!response.ok) {
       throw new Error();
@@ -10,16 +17,13 @@ const getData = () => fetch(
     return response.json();
   })
   .catch(() => {
-    dataAlert();
+    showDataAlert();
   });
 
 const sendData = (formData) => fetch(
-  'https://31.javascript.htmlacademy.pro/kekstagram',
+  `${BASE_URL}${Url.SEND}`,
   {
     method: 'POST',
-    // headers: {
-    //   'Content-Type': 'multipart/form-data',
-    // },
     body: formData,
   })
   .then((response) => {

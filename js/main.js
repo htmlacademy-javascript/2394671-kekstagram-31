@@ -7,15 +7,17 @@ import {initSlider} from './customization-color-filter-photo.js';
 import {getData} from './api.js';
 import {closePhotoEditorOverlay} from './photo-editor.js';
 
-// - Создает фотографии на странице
+// - Принимает Данные с сервера
 getData()
   .then((photos) => {
+    // - Создает фотографии на странице
     createUserPhoto(photos);
+
+    // - Добавляет Модальное окно с выбранной фотографией
+    initBigPicture(photos);
   });
 
 // - Добавляет Модальное окно с выбранной фотографией
-getData()
-  .then((photos) => initBigPicture(photos));
 
 // - Добавляет Модальное окно редактирования
 initPhotoEditor();
