@@ -1,7 +1,4 @@
 import {createUserPhoto, createUserRandomPhoto, createUserPhotoMostDiscussed} from './create-user-pictures.js';
-import {debounce} from './util.js';
-
-const RERENDER_DELAY = 500;
 
 const Filters = {
   default: createUserPhoto,
@@ -19,13 +16,8 @@ const getEventListener = (photos) => {
       allFilters.forEach((element) => element.classList.remove('img-filters__button--active'));
       evt.target.classList.add('img-filters__button--active');
 
-      const drawNewPhotos = () => {
-        const currentFilter = Filters[evt.target.value];
-        currentFilter(photos);
-      };
-
-      // drawNewPhotos(evt, photos);
-      debounce(() => drawNewPhotos(evt, photos), RERENDER_DELAY)();
+      const currentFilter = Filters[evt.target.dataset.filter];
+      currentFilter(photos);
     }
   });
 };

@@ -1,5 +1,7 @@
 import {getRandomId} from './util.js';
+import {debounce} from './util.js';
 
+const RERENDER_DELAY = 500;
 const PHOTO_QUANTITY = 10;
 
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
@@ -11,11 +13,8 @@ const deletePreviousPhoto = () => {
   allPictures.forEach((element)=> element.remove());
 };
 
-
-const createUserPhoto = (photo) => {
-  deletePreviousPhoto();
-
-  photo.forEach(({url, description, likes, comments, id})=> {
+const renderMiniatures = debounce((photoArray) => {
+  photoArray.forEach(({url, description, likes, comments, id})=> {
     const templatePictureClone = templatePicture.cloneNode(true);
     const image = templatePictureClone.querySelector('.picture__img');
 
@@ -28,28 +27,26 @@ const createUserPhoto = (photo) => {
   });
 
   picturesList.append(photoFragment);
+}, RERENDER_DELAY);
+
+
+const createUserPhoto = (photos) => {
+  deletePreviousPhoto();
+  renderMiniatures(photos);
 };
 
 const createUserRandomPhoto = (photo) => {
   deletePreviousPhoto();
 
   const getRandomPhotoId = getRandomId(0, photo.length - 1);
+  const newPhotoArray = [];
 
   for (let i = 0; i < PHOTO_QUANTITY; i++) {
     const currentPhotoId = getRandomPhotoId();
-
-    const templatePictureClone = templatePicture.cloneNode(true);
-    const image = templatePictureClone.querySelector('.picture__img');
-
-    templatePictureClone.dataset.pictureId = photo[currentPhotoId].id;
-    image.src = photo[currentPhotoId].url;
-    image.alt = photo[currentPhotoId].description;
-    templatePictureClone.querySelector('.picture__likes').textContent = photo[currentPhotoId].likes;
-    templatePictureClone.querySelector('.picture__comments').textContent = photo[currentPhotoId].comments.length;
-    photoFragment.append(templatePictureClone);
+    newPhotoArray.push(photo[currentPhotoId]);
   }
 
-  picturesList.append(photoFragment);
+  renderMiniatures(newPhotoArray);
 };
 
 const sortPhotos = (photoA, photoB) => {
@@ -61,21 +58,9 @@ const sortPhotos = (photoA, photoB) => {
 const createUserPhotoMostDiscussed = (photos) => {
   deletePreviousPhoto();
 
-  const newPhotoArray = photos.slice().sort(sortPhotos);
+  const newSortPhoto = photos.slice().sort(sortPhotos);
 
-  newPhotoArray.forEach(({url, description, likes, comments, id})=> {
-    const templatePictureClone = templatePicture.cloneNode(true);
-    const image = templatePictureClone.querySelector('.picture__img');
-
-    templatePictureClone.dataset.pictureId = id;
-    image.src = url;
-    image.alt = description;
-    templatePictureClone.querySelector('.picture__likes').textContent = likes;
-    templatePictureClone.querySelector('.picture__comments').textContent = comments.length;
-    photoFragment.append(templatePictureClone);
-  });
-
-  picturesList.append(photoFragment);
+  renderMiniatures(newSortPhoto);
 };
 
 export {createUserPhoto, createUserRandomPhoto, createUserPhotoMostDiscussed};

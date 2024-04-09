@@ -11,6 +11,7 @@ const buttonClose = document.querySelector('.img-upload__cancel');
 const textHashtagsInput = document.querySelector('.text__hashtags');
 const textareaDescriptionInput = document.querySelector('.text__description');
 const uploadPreview = document.querySelector('.img-upload__preview img');
+const photoFilterMiniatures = document.querySelectorAll('.effects__preview');
 
 const closePhotoEditorOverlay = () => {
   // - Сбрасываем валидацию после закрытия модального окна
@@ -20,7 +21,6 @@ const closePhotoEditorOverlay = () => {
 
   clearPhotoSize();
   sliderClear();
-
 
   // - Очищаем input от файлов при закрытии
   photoUploadInput.value = '';
@@ -38,6 +38,11 @@ const getPictureFile = () => {
   const correctFileName = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (correctFileName) {
     uploadPreview.src = URL.createObjectURL(file);
+    console.log(URL.createObjectURL(file));
+    photoFilterMiniatures.forEach((element) => {
+      element.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
+
   } else {
     closePhotoEditorOverlay();
   }

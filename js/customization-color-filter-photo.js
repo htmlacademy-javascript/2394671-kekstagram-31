@@ -110,7 +110,7 @@ listFilter.addEventListener('change', (evt) => {
   showSlider();
   clearStyle();
 
-  if (evt.target.value === 'None') {
+  if (evt.target.value === 'none') {
     hideSlider();
   }
 
