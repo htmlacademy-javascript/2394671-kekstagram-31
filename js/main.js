@@ -15,7 +15,7 @@ getData()
     createUserPhoto(photos);
     // - Добавляет Модальное окно с выбранной фотографией
     initBigPicture(photos);
-
+    // - Добавляет фильтрацию фотографий
     imgFilter(photos);
   });
 
