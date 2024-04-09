@@ -38,11 +38,9 @@ const getPictureFile = () => {
   const correctFileName = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (correctFileName) {
     uploadPreview.src = URL.createObjectURL(file);
-    console.log(URL.createObjectURL(file));
     photoFilterMiniatures.forEach((element) => {
       element.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
     });
-
   } else {
     closePhotoEditorOverlay();
   }
