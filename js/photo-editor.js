@@ -3,19 +3,15 @@ import {resetValidation} from './validate-photo-editor.js';
 import {clearPhotoSize} from './customization-size-photo.js';
 import {sliderClear} from './customization-color-filter-photo.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const photoUploadInput = document.querySelector('.img-upload__input');
 const photoEditorOverlay = document.querySelector('.img-upload__overlay');
 const buttonClose = document.querySelector('.img-upload__cancel');
 const textHashtagsInput = document.querySelector('.text__hashtags');
 const textareaDescriptionInput = document.querySelector('.text__description');
-
-const openPhotoEditorOverlay = () => {
-  photoEditorOverlay.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
-  // - Добавляем обработчик на клавишу Esc
-  document.addEventListener('keydown', onDocumentKeydown);
-};
+const uploadPreview = document.querySelector('.img-upload__preview img');
+const photoFilterMiniatures = document.querySelectorAll('.effects__preview');
 
 const closePhotoEditorOverlay = () => {
   // - Сбрасываем валидацию после закрытия модального окна
@@ -33,6 +29,30 @@ const closePhotoEditorOverlay = () => {
 
   // - Удаляем обработчик на клавишу Esc
   document.removeEventListener('keydown', onDocumentKeydown);
+};
+
+const getPictureFile = () => {
+  const file = photoUploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const correctFileName = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (correctFileName) {
+    uploadPreview.src = URL.createObjectURL(file);
+    photoFilterMiniatures.forEach((element) => {
+      element.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
+  } else {
+    closePhotoEditorOverlay();
+  }
+};
+
+const openPhotoEditorOverlay = () => {
+  photoEditorOverlay.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  getPictureFile();
+
+  // - Добавляем обработчик на клавишу Esc
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const isActiveElement = (currentElement) => document.activeElement !== currentElement;
