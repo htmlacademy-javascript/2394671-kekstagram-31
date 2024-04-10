@@ -8,6 +8,8 @@ const templatePicture = document.querySelector('#picture').content.querySelector
 const picturesList = document.querySelector('.pictures');
 const photoFragment = document.createDocumentFragment();
 
+
+// - Очищает фотографии со страницы
 const deletePreviousPhoto = () => {
   const allPictures = document.querySelectorAll('.picture');
   allPictures.forEach((element)=> element.remove());
