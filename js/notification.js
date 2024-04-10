@@ -1,18 +1,18 @@
 import {isEscapeKey} from './util.js';
 
-const ALERT_SHOW_TIME = 5000;
+const ERROR_SHOW_TIME = 5000;
 
 const templateDataError = document.querySelector('#data-error').content.querySelector('.data-error');
 const templateSuccess = document.querySelector('#success').content.querySelector('.success');
-const templateAlert = document.querySelector('#error').content.querySelector('.error');
+const templateError = document.querySelector('#error').content.querySelector('.error');
 
-const showDataAlert = () => {
+const showDataError = () => {
   const templateErrorClone = templateDataError.cloneNode(true);
   document.body.append(templateErrorClone);
 
   setTimeout(() => {
     templateErrorClone.remove();
-  }, ALERT_SHOW_TIME);
+  }, ERROR_SHOW_TIME);
 };
 
 const showNotification = (template) => {
@@ -57,7 +57,7 @@ const sendDataSuccess = () => {
 };
 
 const sendDataError = () => {
-  showNotification(templateAlert);
+  showNotification(templateError);
 };
 
-export {showDataAlert, sendDataSuccess, sendDataError};
+export {showDataError, sendDataSuccess, sendDataError};

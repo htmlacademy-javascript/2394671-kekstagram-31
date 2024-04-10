@@ -1,5 +1,5 @@
 import {sendData} from './api.js';
-import {sendDataSuccess, sendDataError} from './alert-message.js';
+import {sendDataSuccess, sendDataError} from './notification.js';
 
 
 const NUMBER_TAGS = 5;

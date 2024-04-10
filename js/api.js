@@ -1,4 +1,4 @@
-import {showDataAlert} from './alert-message.js';
+import {showDataError} from './notification.js';
 
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
@@ -17,7 +17,7 @@ const getData = () => fetch(
     return response.json();
   })
   .catch(() => {
-    showDataAlert();
+    showDataError();
   });
 
 const sendData = (formData) => fetch(
