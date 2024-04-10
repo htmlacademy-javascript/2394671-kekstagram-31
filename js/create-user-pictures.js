@@ -8,12 +8,16 @@ const templatePicture = document.querySelector('#picture').content.querySelector
 const picturesList = document.querySelector('.pictures');
 const photoFragment = document.createDocumentFragment();
 
+
+// - Очищает фотографии со страницы
 const deletePreviousPhoto = () => {
   const allPictures = document.querySelectorAll('.picture');
   allPictures.forEach((element)=> element.remove());
 };
 
 const renderMiniatures = debounce((photoArray) => {
+  deletePreviousPhoto();
+
   photoArray.forEach(({url, description, likes, comments, id})=> {
     const templatePictureClone = templatePicture.cloneNode(true);
     const image = templatePictureClone.querySelector('.picture__img');
@@ -31,13 +35,10 @@ const renderMiniatures = debounce((photoArray) => {
 
 
 const createUserPhoto = (photos) => {
-  deletePreviousPhoto();
   renderMiniatures(photos);
 };
 
 const createUserRandomPhoto = (photo) => {
-  deletePreviousPhoto();
-
   const getRandomPhotoId = getRandomId(0, photo.length - 1);
   const newPhotoArray = [];
 
@@ -56,8 +57,6 @@ const sortPhotos = (photoA, photoB) => {
 };
 
 const createUserPhotoMostDiscussed = (photos) => {
-  deletePreviousPhoto();
-
   const newSortPhoto = photos.slice().sort(sortPhotos);
 
   renderMiniatures(newSortPhoto);

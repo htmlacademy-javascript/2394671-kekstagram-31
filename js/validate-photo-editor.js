@@ -28,22 +28,21 @@ const pristine = new Pristine(photoEditorForm, {
 // - Правило: сравниваем введенные в строку теги с валидным значением
 const checksHashTagSpelling = (value) => {
   // - создаем массив тегов введенных пользователем
-  const hashtagArray = getHashtagArray(value);
-
+  const hashtagArray = getHashtagArray(value).filter((hashTag) => hashTag.length >= 1);
   // - Если поле input пустой или созданный массив тегов проходит валидацию вернется true иначе tag invalid
   return value === '' || hashtagArray.every((tag) => validHashtag.test(tag));
 };
 
 // - Правило: не больше определенного числа hashtag
 const checkHastTagQuantity = (value) => {
-  const hashtagArray = getHashtagArray(value);
+  const hashtagArray = getHashtagArray(value).filter((hashTag) => hashTag.length >= 1);
 
   return hashtagArray.length <= NUMBER_TAGS;
 };
 
 // - Правило: хэштеги не могут повторятся
 const checksDuplicatesHashTag = (value) => {
-  const hashtagArray = getHashtagArray(value).map((arrayElement) => arrayElement.toLowerCase());
+  const hashtagArray = getHashtagArray(value).filter((hashTag) => hashTag.length >= 1).map((arrayElement) => arrayElement.toLowerCase());
 
   const duplicates = hashtagArray.filter((tag, index, tags) => tags.indexOf(tag) !== index);
 

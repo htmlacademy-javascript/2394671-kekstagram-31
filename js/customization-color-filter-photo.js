@@ -66,6 +66,14 @@ const createSlider = () => {
     start: 80,
     step: 1,
     connect: 'lower',
+    format: {
+      to: function (value) {
+        return value;
+      },
+      from: function (value) {
+        return parseFloat(value);
+      },
+    }
   });
 };
 
@@ -82,7 +90,6 @@ const hideSlider = () => {
 
 const clearStyle = () => {
   currentPhoto.style.filter = '';
-  inputValueSlider.value = '';
 };
 
 // - скрываем слайдер т.к по умолчанию стоит вариант без фильтра.
