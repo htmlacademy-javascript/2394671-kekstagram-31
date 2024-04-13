@@ -67,12 +67,8 @@ const createSlider = () => {
     step: 1,
     connect: 'lower',
     format: {
-      to: function (value) {
-        return value;
-      },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      to: (value) => value,
+      from: (value) => parseFloat(value),
     }
   });
 };

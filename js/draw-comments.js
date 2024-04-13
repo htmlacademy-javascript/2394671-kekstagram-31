@@ -3,12 +3,12 @@ const COUNT_STEP = 5;
 let currentCount = 0;
 let comments = [];
 
-const bigPictureNode = document.querySelector('.big-picture');
-const socialCommentsNode = bigPictureNode.querySelector('.social__comments');
-const commentsLoaderNode = bigPictureNode.querySelector('.social__comments-loader');
-const socialCommentShownCount = bigPictureNode.querySelector('.social__comment-shown-count');
-const socialCommentTotalCount = bigPictureNode.querySelector('.social__comment-total-count');
-socialCommentsNode.innerHTML = '';
+const bigPictureElement = document.querySelector('.big-picture');
+const socialCommentsElement = bigPictureElement.querySelector('.social__comments');
+const commentsLoaderElement = bigPictureElement.querySelector('.social__comments-loader');
+const socialCommentShownCount = bigPictureElement.querySelector('.social__comment-shown-count');
+const socialCommentTotalCount = bigPictureElement.querySelector('.social__comment-total-count');
+socialCommentsElement.innerHTML = '';
 
 
 const renderNextComments = () => {
@@ -40,14 +40,14 @@ const renderNextComments = () => {
     socialCommentsFragment.append(comment);
   });
 
-  socialCommentsNode.append(socialCommentsFragment);
+  socialCommentsElement.append(socialCommentsFragment);
 
   // - Количество показанных комментариев и общее число комментариев отображается в блоке .social__comment-count.
   socialCommentShownCount.textContent = renderedCommentsLength;
   socialCommentTotalCount.textContent = comments.length;
 
   if (renderedCommentsLength >= comments.length) {
-    commentsLoaderNode.classList.add('hidden');
+    commentsLoaderElement.classList.add('hidden');
   }
 
   // - Добавляем ранее открытым комментариям количество открытых комментариев на этом шаге
@@ -62,15 +62,15 @@ const renderComments = (currentPhotoComments) => {
   renderNextComments();
 
   // - Отображение дополнительных комментариев происходит при нажатии на кнопку .comments-loader.
-  commentsLoaderNode.addEventListener('click', renderNextComments);
+  commentsLoaderElement.addEventListener('click', renderNextComments);
 };
 
 // - Очищаем поле с комментариями и возвращаем кнопку загрузки доп комментариев, если она была скрыта.
 const clearComments = () => {
   currentCount = 0;
-  socialCommentsNode.innerHTML = '';
-  commentsLoaderNode.classList.remove('hidden');
-  commentsLoaderNode.removeEventListener('click', renderNextComments);
+  socialCommentsElement.innerHTML = '';
+  commentsLoaderElement.classList.remove('hidden');
+  commentsLoaderElement.removeEventListener('click', renderNextComments);
 };
 
 export {renderComments, clearComments};

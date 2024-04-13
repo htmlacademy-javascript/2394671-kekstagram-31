@@ -1,11 +1,12 @@
-import {isEscapeKey} from './util';
-import {drawBigPicture} from './draw-big-picture';
-import {clearComments} from './draw-comments';
+import {isEscapeKey} from './util.js';
+import {drawBigPicture} from './draw-big-picture.js';
+import {clearComments} from './draw-comments.js';
 
 const pictureContainer = document.querySelector('.pictures');
 const windowModal = document.querySelector('.big-picture');
 const buttonClose = document.querySelector('#picture-cancel');
 const socialCommentsList = document.querySelector('.social__comments');
+const commentTextInput = document.querySelector('.social__footer-text');
 
 const openWindowModal = (evt, posts) => {
   if (evt.target.closest('.picture')) {
@@ -36,8 +37,10 @@ const closeWindowModal = () => {
   document.body.classList.remove('modal-open');
 };
 
+const isActiveElement = (currentElement) => document.activeElement !== currentElement;
+
 function onDocumentKeydown (evt) {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) & isActiveElement(commentTextInput)) {
     evt.preventDefault();
     closeWindowModal();
   }

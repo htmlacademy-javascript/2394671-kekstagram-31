@@ -22,9 +22,9 @@ const getEventListener = (photos) => {
   });
 };
 
-const imgFilter = (photos) => {
+const imgFiltering = (photos) => {
   sectionFilters.classList.remove('img-filters--inactive');
   getEventListener(photos);
 };
 
-export {imgFilter};
+export {imgFiltering};

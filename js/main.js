@@ -6,7 +6,7 @@ import {customizationSizePhoto} from './customization-size-photo.js';
 import {initSlider} from './customization-color-filter-photo.js';
 import {getData} from './api.js';
 import {closePhotoEditorOverlay} from './photo-editor.js';
-import {imgFilter} from './img-filter.js';
+import {imgFiltering} from './img-filter.js';
 
 // - Принимает Данные с сервера
 getData()
@@ -16,7 +16,7 @@ getData()
     // - Добавляет Модальное окно с выбранной фотографией
     initBigPicture(photos);
     // - Добавляет фильтрацию фотографий
-    imgFilter(photos);
+    imgFiltering(photos);
   });
 
 // - Добавляет Модальное окно редактирования
