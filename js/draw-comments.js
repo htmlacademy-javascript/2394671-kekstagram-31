@@ -54,6 +54,10 @@ const renderNextComments = () => {
   currentCount += COUNT_STEP;
 };
 
+const onButtonLoadClick = () => {
+  renderNextComments();
+};
+
 const renderComments = (currentPhotoComments) => {
   // - Используем переменную comments внутри функции renderNextComments().
   comments = currentPhotoComments;
@@ -62,7 +66,7 @@ const renderComments = (currentPhotoComments) => {
   renderNextComments();
 
   // - Отображение дополнительных комментариев происходит при нажатии на кнопку .comments-loader.
-  commentsLoaderElement.addEventListener('click', renderNextComments);
+  commentsLoaderElement.addEventListener('click', onButtonLoadClick);
 };
 
 // - Очищаем поле с комментариями и возвращаем кнопку загрузки доп комментариев, если она была скрыта.
@@ -70,7 +74,7 @@ const clearComments = () => {
   currentCount = 0;
   socialCommentsElement.innerHTML = '';
   commentsLoaderElement.classList.remove('hidden');
-  commentsLoaderElement.removeEventListener('click', renderNextComments);
+  commentsLoaderElement.removeEventListener('click', onButtonLoadClick);
 };
 
 export {renderComments, clearComments};
