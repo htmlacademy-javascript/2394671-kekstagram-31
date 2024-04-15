@@ -1,4 +1,6 @@
 const COUNT_STEP = 25;
+const MAX_PHOTO_SIZE = 100;
+const MIN_PHOTO_SIZE = 25;
 
 const scaleButtonSmaller = document.querySelector('.scale__control--smaller');
 const scaleButtonBigger = document.querySelector('.scale__control--bigger');
@@ -9,7 +11,7 @@ let currentValue = parseInt(scalePhotoSize.value, 10);
 
 const reducingPhoto = () => {
   scaleButtonSmaller.addEventListener('click', () => {
-    if (currentValue <= 25){
+    if (currentValue <= MIN_PHOTO_SIZE){
       return false;
     }
 
@@ -27,7 +29,7 @@ const reducingPhoto = () => {
 
 const enlargesPhoto = () => {
   scaleButtonBigger.addEventListener('click', () => {
-    if (currentValue >= 100){
+    if (currentValue >= MAX_PHOTO_SIZE){
       return false;
     }
 

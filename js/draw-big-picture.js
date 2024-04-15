@@ -1,4 +1,4 @@
-import {renderComments} from './draw-comments';
+import {renderComments} from './draw-comments.js';
 
 const bigPicture = document.querySelector('.big-picture__img img');
 const likesCount = document.querySelector('.likes-count');

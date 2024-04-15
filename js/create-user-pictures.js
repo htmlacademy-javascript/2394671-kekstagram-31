@@ -40,14 +40,14 @@ const createUserPhoto = (photos) => {
 
 const createUserRandomPhoto = (photo) => {
   const getRandomPhotoId = getRandomId(0, photo.length - 1);
-  const newPhotoArray = [];
+  const photoIds = [];
 
   for (let i = 0; i < PHOTO_QUANTITY; i++) {
     const currentPhotoId = getRandomPhotoId();
-    newPhotoArray.push(photo[currentPhotoId]);
+    photoIds.push(photo[currentPhotoId]);
   }
 
-  renderMiniatures(newPhotoArray);
+  renderMiniatures(photoIds);
 };
 
 const sortPhotos = (photoA, photoB) => {
