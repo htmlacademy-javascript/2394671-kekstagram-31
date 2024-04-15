@@ -1,6 +1,6 @@
 import {createUserPhoto, createUserRandomPhoto, createUserPhotoMostDiscussed} from './create-user-pictures.js';
 
-const Filters = {
+const filters = {
   default: createUserPhoto,
   random: createUserRandomPhoto,
   discussed: createUserPhotoMostDiscussed,
@@ -16,7 +16,7 @@ const getEventListener = (photos) => {
       allFilters.forEach((element) => element.classList.remove('img-filters__button--active'));
       evt.target.classList.add('img-filters__button--active');
 
-      const currentFilter = Filters[evt.target.dataset.filter];
+      const currentFilter = filters[evt.target.dataset.filter];
       currentFilter(photos);
     }
   });

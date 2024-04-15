@@ -1,55 +1,55 @@
 const filterList = {
   none: {
-    MIN: 0,
-    MAX: 0,
-    STEP: 0,
-    START: 1,
-    FILTER: '',
-    UNITS: ''
+    min: 0,
+    max: 0,
+    step: 0,
+    start: 1,
+    filter: '',
+    units: ''
   },
   chrome: {
-    MIN: 0,
-    MAX: 1,
-    STEP: 0.1,
-    START: 1,
-    FILTER: 'grayscale',
-    UNITS: ''
+    min: 0,
+    max: 1,
+    step: 0.1,
+    start: 1,
+    filter: 'grayscale',
+    units: ''
   },
   sepia: {
-    MIN: 0,
-    MAX: 1,
-    STEP: 0.1,
-    START: 1,
-    FILTER: 'sepia',
-    UNITS: ''
+    min: 0,
+    max: 1,
+    step: 0.1,
+    start: 1,
+    filter: 'sepia',
+    units: ''
   },
   marvin: {
-    MIN: 0,
-    MAX: 100,
-    STEP: 1,
-    START: 100,
-    FILTER: 'invert',
-    UNITS: '%'
+    min: 0,
+    max: 100,
+    step: 1,
+    start: 100,
+    filter: 'invert',
+    units: '%'
   },
   phobos: {
-    MIN: 0,
-    MAX: 3,
-    STEP: 0.1,
-    START: 3,
-    FILTER: 'blur',
-    UNITS: 'px'
+    min: 0,
+    max: 3,
+    step: 0.1,
+    start: 3,
+    filter: 'blur',
+    units: 'px'
   },
   heat: {
-    MIN: 1,
-    MAX: 3,
-    STEP: 0.1,
-    START: 3,
-    FILTER: 'brightness',
-    UNITS: ''
+    min: 1,
+    max: 3,
+    step: 0.1,
+    start: 3,
+    filter: 'brightness',
+    units: ''
   }
 };
 
-const sliderElement = document.querySelector('.effect-level__slider');
+const sliderEffectLevel = document.querySelector('.effect-level__slider');
 const sliderParent = document.querySelector('.img-upload__effect-level');
 const inputValueSlider = document.querySelector('.effect-level__value');
 const currentPhoto = document.querySelector('.img-upload__preview img');
@@ -58,7 +58,7 @@ const listFilterOriginal = listFilter.querySelector('#effect-none');
 
 // - Настраиваем слайдер.
 const createSlider = () => {
-  noUiSlider.create(sliderElement, {
+  noUiSlider.create(sliderEffectLevel, {
     range: {
       min: 0,
       max: 100,
@@ -75,12 +75,12 @@ const createSlider = () => {
 
 
 const showSlider = () => {
-  sliderElement.removeAttribute('disabled', true);
+  sliderEffectLevel.removeAttribute('disabled', true);
   sliderParent.classList.remove('hidden');
 };
 
 const hideSlider = () => {
-  sliderElement.setAttribute('disabled', true);
+  sliderEffectLevel.setAttribute('disabled', true);
   sliderParent.classList.add('hidden');
 };
 
@@ -96,18 +96,18 @@ let currentSettings = {};
 listFilter.addEventListener('change', (evt) => {
   const currentFilter = filterList[evt.target.value];
 
-  sliderElement.noUiSlider.updateOptions({
+  sliderEffectLevel.noUiSlider.updateOptions({
     range: {
-      min: currentFilter.MIN,
-      max: currentFilter.MAX,
+      min: currentFilter.min,
+      max: currentFilter.max,
     },
-    step: currentFilter.STEP,
-    start: currentFilter.START,
+    step: currentFilter.step,
+    start: currentFilter.start,
   });
 
   currentSettings = {
-    FILTER: currentFilter.FILTER,
-    UNITS: currentFilter.UNITS
+    filter: currentFilter.filter,
+    units: currentFilter.units
   };
 
   showSlider();
@@ -117,7 +117,7 @@ listFilter.addEventListener('change', (evt) => {
     hideSlider();
   }
 
-  currentPhoto.style.filter = `${currentFilter.FILTER}(${currentFilter.MAX}${currentFilter.UNITS})`;
+  currentPhoto.style.filter = `${currentFilter.filter}(${currentFilter.max}${currentFilter.units})`;
 });
 
 const initSlider = () => {
@@ -125,12 +125,12 @@ const initSlider = () => {
   createSlider();
 
   // - Записываем значение слайдера в Input при изменение значения слайдера.
-  sliderElement.noUiSlider.on('update', () => {
+  sliderEffectLevel.noUiSlider.on('update', () => {
     // - подставляем в input актуальное значение слайдера.
-    inputValueSlider.value = sliderElement.noUiSlider.get();
+    inputValueSlider.value = sliderEffectLevel.noUiSlider.get();
 
     // - Подставляем актуальные значения для стилей в зависимости от выбранного режима цветокоррекции.
-    currentPhoto.style.filter = `${currentSettings.FILTER}(${inputValueSlider.value}${currentSettings.UNITS})`;
+    currentPhoto.style.filter = `${currentSettings.filter}(${inputValueSlider.value}${currentSettings.units})`;
   });
 };
 
